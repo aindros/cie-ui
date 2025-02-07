@@ -57,6 +57,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import it.ipzs.cieid.util.OSUtils;
+import it.ipzs.cieid.util.ProcessUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -3466,6 +3468,21 @@ public class MainFrame extends JFrame {
                                         JOptionPane.showMessageDialog(MainFrame.this.getContentPane(), "Carta già abilitata", "Impossibile abbinare la carta", JOptionPane.ERROR_MESSAGE);
                                         selectHome();
                                         break;
+									case CKR_DEVICE_ERROR:
+										if (OSUtils.isUnix() && ProcessUtils.isRunning("pcscd")) {
+											logger.Error("Errore durante la comunicazione con il lettore (possibile che pcscd non sia in esecuzione).");
+											JOptionPane.showMessageDialog(MainFrame.this.getContentPane(),
+											                              "Errore durante la comunicazione con il lettore. Controllare che il demone pcscd sia in esecuzione",
+											                              "Errore durante l'abbinamento",
+											                              JOptionPane.ERROR_MESSAGE);
+										} else {
+											logger.Error("Errore durante la comunicazione con il lettore");
+											JOptionPane.showMessageDialog(MainFrame.this.getContentPane(),
+											                              "Errore durante la comunicazione con il lettore.",
+											                              "Errore durante l'abbinamento",
+											                              JOptionPane.ERROR_MESSAGE);
+										}
+										break;
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
