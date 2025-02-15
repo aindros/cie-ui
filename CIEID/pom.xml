@@ -13,6 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>1.8</maven.compiler.release>
+		<apache.pdfbox.version>2.0.8</apache.pdfbox.version>
 	</properties>
 
 	<dependencyManagement>
@@ -69,11 +70,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.ghost4j</groupId>
-			<artifactId>ghost4j</artifactId>
-			<version>1.0.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/ghost4j-1.0.1.jar</systemPath>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>${apache.pdfbox.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox-tools</artifactId>
+			<version>${apache.pdfbox.version}</version>
 		</dependency>
 
 		<dependency>
