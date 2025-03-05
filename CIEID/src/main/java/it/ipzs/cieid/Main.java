@@ -16,7 +16,7 @@ import ch.swingfx.twinkle.window.Positions;
 import it.ipzs.cieid.util.Utils;
 
 
-public class MainApplication {
+public class Main {
 
 	private JFrame frame;
 
@@ -53,13 +53,13 @@ public class MainApplication {
 
 	public static void showUI(String[] args)
 	{
-		MainApplication window = new MainApplication(args);
+		Main window = new Main(args);
 		window.frame.setVisible(true);
 	}
 	/**
 	 * Create the application.
 	 */
-	public MainApplication(String[] args) {
+	public Main(String[] args) {
 		initialize(args);
 	}
 
@@ -114,7 +114,7 @@ public class MainApplication {
 			public void clicked(NotificationEvent event)
 			{
 //				setLookAndFeel();
-				MainApplication.showUI(new String[] {});
+				Main.showUI(new String[] {});
 			}
 		});
 
@@ -133,7 +133,7 @@ public class MainApplication {
 			@Override
 			public void clicked(NotificationEvent event)
 			{
-				MainApplication.showUI(new String[] {"unlock"});
+				Main.showUI(new String[] {"unlock"});
 			}
 		});
 
