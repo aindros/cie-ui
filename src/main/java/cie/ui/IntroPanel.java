@@ -31,8 +31,6 @@
 
 package cie.ui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -43,7 +41,6 @@ import javax.swing.text.StyledDocument;
 import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.*;
 
-import java.awt.CardLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -68,65 +65,7 @@ public class IntroPanel extends JPanel {
 	public IntroPanel() {
 		init();
 		initWelcomePanel();
-
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_1, null);
-		panel_1.setLayout(null);
-		panel_1.setBackground(Color.WHITE);
-		
-		JLabel label_1 = new JLabel("Per iniziare");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("Dialog", Font.BOLD, 30));
-		label_1.setBounds(264, 36, 190, 36);
-		panel_1.add(label_1);
-		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setText("Munisciti di un lettore di smart card contactless, della tua Carta di Identità Elettronica e del PIN");
-		textPane_1.setEditable(false);
-		textPane_1.setBounds(63, 84, 583, 21);
-		panel_1.add(textPane_1);
-		
-		JLabel lblNewLabel1 = new JLabel("");
-		lblNewLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-		try {
-			lblNewLabel1.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroPanel.class.getResource("/it/ipzs/cieid/res/flusso_intro_02.png")))));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		lblNewLabel1.setBounds(111, 152, 563, 335);
-		panel_1.add(lblNewLabel1);
-		
-		final JCheckBox chckbxNoMore = new JCheckBox("Non mostrare più");
-		chckbxNoMore.setBackground(Color.WHITE);
-		chckbxNoMore.setBounds(591, 508, 157, 23);
-		panel_1.add(chckbxNoMore);
-		
-		JButton btnInizia = new JButton("Inizia");
-		btnInizia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(chckbxNoMore.isSelected())
-					Utils.setProperty("nomore", "true");
-				
-				// TODO open main frame
-				JFrame frame = new MainFrame(new String[] { });			
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				
-				setVisible(false);
-				frame.setVisible(true);
-			}
-		});
-		
-		btnInizia.setForeground(Color.WHITE);
-		btnInizia.setBackground(new Color(30, 144, 255));
-		btnInizia.setBounds(337, 507, 114, 25);
-		panel_1.add(btnInizia);
-
-		StyledDocument doc = textPane_1.getStyledDocument();
-		SimpleAttributeSet center = new SimpleAttributeSet();
-		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+		initBeginningPanel();
 	}
 
 	private void init() {
@@ -178,6 +117,66 @@ public class IntroPanel extends JPanel {
 		}
 		lblNewLabel.setBounds(111, 152, 563, 335);
 		panel.add(lblNewLabel);
+
+		StyledDocument doc = textPane.getStyledDocument();
+		SimpleAttributeSet center = new SimpleAttributeSet();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+		addTab(panel);
+	}
+
+	private void initBeginningPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+
+		JLabel label = new JLabel("Per iniziare");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Dialog", Font.BOLD, 30));
+		label.setBounds(264, 36, 190, 36);
+		panel.add(label);
+
+		JTextPane textPane = new JTextPane();
+		textPane.setText("Munisciti di un lettore di smart card contactless, della tua Carta di Identità Elettronica e del PIN");
+		textPane.setEditable(false);
+		textPane.setBounds(63, 84, 583, 21);
+		panel.add(textPane);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroPanel.class.getResource("/it/ipzs/cieid/res/flusso_intro_02.png")))));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		lblNewLabel.setBounds(111, 152, 563, 335);
+		panel.add(lblNewLabel);
+
+		final JCheckBox chckbxNoMore = new JCheckBox("Non mostrare più");
+		chckbxNoMore.setBackground(Color.WHITE);
+		chckbxNoMore.setBounds(591, 508, 157, 23);
+		panel.add(chckbxNoMore);
+
+		JButton btnInizia = new JButton("Inizia");
+		btnInizia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxNoMore.isSelected())
+					Utils.setProperty("nomore", "true");
+
+				// TODO open main frame
+				JFrame frame = new MainFrame(new String[] { });
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+				setVisible(false);
+				frame.setVisible(true);
+			}
+		});
+		btnInizia.setForeground(Color.WHITE);
+		btnInizia.setBackground(new Color(30, 144, 255));
+		btnInizia.setBounds(337, 507, 114, 25);
+		panel.add(btnInizia);
 
 		StyledDocument doc = textPane.getStyledDocument();
 		SimpleAttributeSet center = new SimpleAttributeSet();
