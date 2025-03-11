@@ -56,7 +56,7 @@ public class Main {
 	 */
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(() -> new ArgumentParser()
-				.addOption(0, "pinwrong",          Main::notifyPinWrong)
+				.addOption(0, "pinwrong",          () -> Notify.message("PIN errato", 5))
 				.addOption(0, "cardnotregistered", Main::notifyCardNotRegistered)
 				.addOption(0, "pinlocked",         Main::notifyPinLocked)
 				.addDefaultOption(() -> {
@@ -100,57 +100,11 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	private static void notifyPinWrong()
-	{
-		NotificationBuilder nb = Notify.builder();
-		nb.withMessage("PIN errato");
-		nb.withDisplayTime(1000 * 5);
-
-//		nb.withListener(new NotificationEventAdapter() {
-//			@Override
-//			public void clicked(NotificationEvent event)
-//			{
-//				// do nothing
-//				setLookAndFeel();
-//				MainApplication.showUI(new String[] {});
-//			}
-//		});
-
-		nb.showNotification();
+	private static void notifyCardNotRegistered() {
+		Notify.message("Carta non abbinata, premere qui per abbinare la CIE", 10, (e) -> Main.showUI(new String[] {}));
 	}
 
-	private static void notifyCardNotRegistered()
-	{
-		NotificationBuilder nb = Notify.builder();
-		nb.withMessage("Carta non abbinata, premere qui per abbinare la CIE");
-		nb.withDisplayTime(1000 * 10);
-
-		nb.withListener(new NotificationEventAdapter() {
-			@Override
-			public void clicked(NotificationEvent event)
-			{
-//				setLookAndFeel();
-				Main.showUI(new String[] {});
-			}
-		});
-
-		nb.showNotification();
-	}
-
-	private static void notifyPinLocked()
-	{
-		NotificationBuilder nb = Notify.builder();
-		nb.withMessage("Carta bloccata, premere qui per sbloccarla con il PUK");
-		nb.withDisplayTime(1000 * 10);
-
-		nb.withListener(new NotificationEventAdapter() {
-			@Override
-			public void clicked(NotificationEvent event)
-			{
-				Main.showUI(new String[] {"unlock"});
-			}
-		});
-
-		nb.showNotification();
+	private static void notifyPinLocked() {
+		Notify.message("Carta bloccata, premere qui per sbloccarla con il PUK", 10, (e) -> Main.showUI(new String[] {"unlock"}));
 	}
 }
