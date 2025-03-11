@@ -83,6 +83,7 @@ import javax.swing.text.StyledDocument;
 import cie.ui.IntroPanel;
 import it.ipzs.cieid.util.OSUtils;
 import it.ipzs.cieid.util.ProcessUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -118,6 +119,7 @@ import javax.swing.JRadioButton;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 
+@Slf4j
 public class MainFrame extends JFrame {
 	private final IntroPanel introPanel = new IntroPanel(this);
 	private JPanel currentPanel = null;
