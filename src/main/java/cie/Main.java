@@ -50,39 +50,25 @@ import it.ipzs.cieid.util.Utils;
 
 
 public class Main {
-
-	private JFrame frame;
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(final String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-
-				if(args.length > 0 && args[0].equals("pinwrong"))
-				{
-					notifyPinWrong();
-				}
-				else if(args.length > 0 && args[0].equals("cardnotregistered"))
-				{
-					notifyCardNotRegistered();
-				}
-				else if(args.length > 0 && args[0].equals("pinlocked"))
-				{
-					notifyPinLocked();
-				}
-				else
-				{
+		EventQueue.invokeLater(() -> new ArgumentParser()
+				.addOption(0, "pinwrong",          Main::notifyPinWrong)
+				.addOption(0, "cardnotregistered", Main::notifyCardNotRegistered)
+				.addOption(0, "pinlocked",         Main::notifyPinLocked)
+				.addDefaultOption(() -> {
 					try {
 						showUI(args);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}
-			}
-		});
+				})
+				.parse(args));
 	}
+
+	private JFrame frame;
 
 	public static void showUI(String[] args)
 	{
