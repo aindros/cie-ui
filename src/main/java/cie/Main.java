@@ -52,15 +52,7 @@ public class Main {
 
 	public static void showUI(String... args) {
 		try {
-			JFrame frame;
-			if ("false".equals(Utils.getProperty("nomore", "false"))) {
-				frame = new MainFrame();
-			} else {
-				frame = new MainFrame(args);
-			}
-
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
+			new MainFrame(args);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

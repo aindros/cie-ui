@@ -56,11 +56,13 @@ import javax.swing.JCheckBox;
 
 public class IntroPanel extends JPanel {
 	private JTabbedPane tabbedPane;
+	private final MainFrame mainFrame;
 
 	/**
 	 * Create the frame.
 	 */
-	public IntroPanel() {
+	public IntroPanel(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
 		init();
 		initWelcomePanel();
 		initBeginningPanel();
@@ -112,11 +114,7 @@ public class IntroPanel extends JPanel {
 				Utils.setProperty("nomore", "true");
 			}
 
-			JFrame frame = new MainFrame(new String[] { });
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-			setVisible(false);
-			frame.setVisible(true);
+			mainFrame.init();
 		});
 
 		addImage(panel, "flusso_intro_02.png");

@@ -119,17 +119,19 @@ import javax.swing.Box;
 import javax.swing.ButtonGroup;
 
 public class MainFrame extends JFrame {
-	private IntroPanel introPanel = new IntroPanel();
+	private final IntroPanel introPanel = new IntroPanel(this);
 	private JPanel currentPanel = null;
+	private final String[] args;
 
-	public MainFrame() {
+	public MainFrame(String[] args) {
+		this.args = args;
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		if("false".equals(Utils.getProperty("nomore", "false"))) {
 			showIntro();
 		} else {
-			/* TODO */
+			init();
 		}
 
 		setLocationRelativeTo(null);
@@ -434,26 +436,11 @@ public class MainFrame extends JFrame {
         }
     }
 
-    /**
-     * Launch the application.
-     */
-    public static void main(final String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MainFrame frame = new MainFrame(args);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	public void init() {
+		if (currentPanel != null) {
+			remove(currentPanel);
+		}
 
-    /**
-     * Create the frame.
-     */
-    public MainFrame(String[] args) {
         logger = Logger.getInstance();
         logConfig = new LogLevelConfig();
         loadLogConfigFromFile();
