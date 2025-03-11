@@ -60,11 +60,11 @@ public class Main {
 
 	private JFrame frame;
 
-	public static void showUI(String[] args)
-	{
+	public static void showUI(String... args) {
 		Main window = new Main(args);
 		window.frame.setVisible(true);
 	}
+
 	/**
 	 * Create the application.
 	 */
@@ -79,10 +79,10 @@ public class Main {
 	}
 
 	private static void notifyCardNotRegistered() {
-		Notify.message("Carta non abbinata, premere qui per abbinare la CIE", 10, (e) -> Main.showUI(new String[] {}));
+		Notify.message("Carta non abbinata, premere qui per abbinare la CIE", 10, (e) -> Main.showUI());
 	}
 
 	private static void notifyPinLocked() {
-		Notify.message("Carta bloccata, premere qui per sbloccarla con il PUK", 10, (e) -> Main.showUI(new String[] {"unlock"}));
+		Notify.message("Carta bloccata, premere qui per sbloccarla con il PUK", 10, (e) -> Main.showUI("unlock"));
 	}
 }
