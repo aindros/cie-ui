@@ -32,18 +32,7 @@
 package cie;
 
 import java.awt.EventQueue;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import javax.swing.JFrame;
-
-import ch.swingfx.twinkle.NotificationBuilder;
-import ch.swingfx.twinkle.event.NotificationEvent;
-import ch.swingfx.twinkle.event.NotificationEventAdapter;
-import ch.swingfx.twinkle.style.closebutton.NullCloseButton;
-import ch.swingfx.twinkle.style.theme.LightDefaultNotification;
-import ch.swingfx.twinkle.window.Positions;
 import cie.ui.Notify;
 import it.ipzs.cieid.IntroFrame;
 import it.ipzs.cieid.MainFrame;
