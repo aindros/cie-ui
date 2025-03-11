@@ -60,7 +60,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 
 public class IntroPanel extends JPanel {
-	private CardLayout cardLayout;
 	private JTabbedPane tabbedPane;
 
 	/**
@@ -70,9 +69,8 @@ public class IntroPanel extends JPanel {
 		setBackground(Color.WHITE);
 		setBounds(100, 100, 800, 600);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(cardLayout = new CardLayout(0, 0));
 		setLayout(null);
-		
+
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, -30, 800, 630);
 		add(tabbedPane);
