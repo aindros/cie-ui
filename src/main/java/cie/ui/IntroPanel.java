@@ -38,6 +38,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import cie.util.CIEResource;
 import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.*;
 
@@ -45,13 +46,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
-import javax.imageio.ImageIO;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -92,7 +90,7 @@ public class IntroPanel extends JPanel {
 		addText(panel, "Il software che ti permette di autenticarti ai servizi online della Pubblica Amministrazione per mezzo della nuova carta d'identità elettronica");
 		addButton(panel, "Continua", null);
 
-		addImage(panel, "/it/ipzs/cieid/res/flusso_intro_01.png");
+		addImage(panel, "flusso_intro_01.png");
 
 		addTab(panel);
 	}
@@ -121,7 +119,7 @@ public class IntroPanel extends JPanel {
 			frame.setVisible(true);
 		});
 
-		addImage(panel, "/it/ipzs/cieid/res/flusso_intro_02.png");
+		addImage(panel, "flusso_intro_02.png");
 
 		addTab(panel);
 	}
@@ -168,8 +166,7 @@ public class IntroPanel extends JPanel {
 		JLabel label = new JLabel("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 
-		Utils.getResource(name)
-				.flatMap(Utils::getImage)
+		CIEResource.getImage(name)
 				.ifPresent(bufferedImage -> label.setIcon(new ImageIcon(Utils.scaleimage(400, 300, bufferedImage))));
 
 		label.setBounds(100, 150, tabbedPane.getWidth() - 200, 335);
