@@ -1,4 +1,4 @@
-package it.ipzs.cieid;
+package cie.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,6 +10,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.*;
 
 import java.awt.CardLayout;

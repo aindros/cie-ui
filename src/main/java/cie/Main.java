@@ -34,7 +34,7 @@ package cie;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import cie.ui.Notify;
-import it.ipzs.cieid.IntroFrame;
+import cie.ui.IntroFrame;
 import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.Utils;
 
