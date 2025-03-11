@@ -46,8 +46,8 @@ public class Main {
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(() -> new ArgumentParser()
 				.addOption(0, "pinwrong",          () -> Notify.message("PIN errato", 5))
-				.addOption(0, "cardnotregistered", Main::notifyCardNotRegistered)
-				.addOption(0, "pinlocked",         Main::notifyPinLocked)
+				.addOption(0, "cardnotregistered", () -> Notify.message("Carta non abbinata, premere qui per abbinare la CIE", 10, (e) -> Main.showUI()))
+				.addOption(0, "pinlocked",         () -> Notify.message("Carta bloccata, premere qui per sbloccarla con il PUK", 10, (e) -> Main.showUI("unlock")))
 				.addDefaultOption(() -> {
 					try {
 						showUI(args);
@@ -76,13 +76,5 @@ public class Main {
 		}
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	private static void notifyCardNotRegistered() {
-		Notify.message("Carta non abbinata, premere qui per abbinare la CIE", 10, (e) -> Main.showUI());
-	}
-
-	private static void notifyPinLocked() {
-		Notify.message("Carta bloccata, premere qui per sbloccarla con il PUK", 10, (e) -> Main.showUI("unlock"));
 	}
 }
