@@ -31,15 +31,7 @@
 
 package it.ipzs.cieid;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
-import java.awt.SystemColor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -88,6 +80,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import cie.ui.IntroPanel;
 import it.ipzs.cieid.util.OSUtils;
 import it.ipzs.cieid.util.ProcessUtils;
 import org.apache.commons.io.FileUtils;
@@ -101,7 +94,6 @@ import it.ipzs.cieid.Firma.PdfPreview;
 import it.ipzs.cieid.Firma.VerifyTable;
 import it.ipzs.cieid.Middleware.verifyInfo;
 import it.ipzs.carousel.*;
-import java.awt.FlowLayout;
 import it.ipzs.cieid.Logger.LogLevel;
 
 import com.google.gson.Gson;
@@ -117,22 +109,46 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import java.awt.Image;
-
-import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JRadioButton;
-import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
-import java.awt.Rectangle;
-import java.awt.Point;
 
 public class MainFrame extends JFrame {
+	private IntroPanel introPanel = new IntroPanel();
+	private JPanel currentPanel = null;
+
+	public MainFrame() {
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		if("false".equals(Utils.getProperty("nomore", "false"))) {
+			showIntro();
+		} else {
+			/* TODO */
+		}
+
+		setLocationRelativeTo(null);
+
+		setVisible(true);
+	}
+
+	public void showIntro() {
+		showPanel(introPanel);
+		setBounds(100, 100, 800, 600);
+		setResizable(false);
+	}
+
+	private void showPanel(JPanel panel) {
+		add(panel, BorderLayout.CENTER);
+		if (currentPanel != null) remove(currentPanel);
+		currentPanel = panel;
+	}
+
     private Logger logger;
     private LogLevelConfig logConfig;
     private static final String LOG_CONFIG_PREFIX_APP = "APP_LOG_LEVEL";

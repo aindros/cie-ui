@@ -31,7 +31,6 @@
 
 package cie.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,10 +49,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -63,46 +59,23 @@ import javax.swing.JTabbedPane;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 
-public class IntroFrame extends JFrame {
-
-	private JPanel contentPane;
+public class IntroPanel extends JPanel {
 	private CardLayout cardLayout;
 	private JTabbedPane tabbedPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IntroFrame frame = new IntroFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public IntroFrame() {
-		setResizable(false);
+	public IntroPanel() {
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(cardLayout = new CardLayout(0, 0));
-		contentPane.setLayout(null);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(cardLayout = new CardLayout(0, 0));
+		setLayout(null);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, -30, 800, 630);
-		contentPane.add(tabbedPane);
+		add(tabbedPane);
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);
@@ -135,7 +108,7 @@ public class IntroFrame extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroFrame.class.getResource("/it/ipzs/cieid/res/flusso_intro_01.png")))));
+			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroPanel.class.getResource("/it/ipzs/cieid/res/flusso_intro_01.png")))));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -163,7 +136,7 @@ public class IntroFrame extends JFrame {
 		JLabel lblNewLabel1 = new JLabel("");
 		lblNewLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblNewLabel1.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroFrame.class.getResource("/it/ipzs/cieid/res/flusso_intro_02.png")))));
+			lblNewLabel1.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroPanel.class.getResource("/it/ipzs/cieid/res/flusso_intro_02.png")))));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

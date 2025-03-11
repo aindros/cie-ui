@@ -34,7 +34,6 @@ package cie;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import cie.ui.Notify;
-import cie.ui.IntroFrame;
 import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.Utils;
 
@@ -55,7 +54,7 @@ public class Main {
 		try {
 			JFrame frame;
 			if ("false".equals(Utils.getProperty("nomore", "false"))) {
-				frame = new IntroFrame();
+				frame = new MainFrame();
 			} else {
 				frame = new MainFrame(args);
 			}
