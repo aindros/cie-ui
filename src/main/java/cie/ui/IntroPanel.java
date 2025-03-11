@@ -114,7 +114,7 @@ public class IntroPanel extends JPanel {
 				Utils.setProperty("nomore", "true");
 			}
 
-			mainFrame.init();
+			mainFrame.showHome();
 		});
 
 		addImage(panel, "flusso_intro_02.png");

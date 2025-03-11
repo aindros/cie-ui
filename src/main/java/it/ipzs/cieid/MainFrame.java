@@ -133,7 +133,7 @@ public class MainFrame extends JFrame {
 		if("false".equals(Utils.getProperty("nomore", "false"))) {
 			showIntro();
 		} else {
-			init();
+			showHome();
 		}
 
 		setLocationRelativeTo(null);
@@ -438,7 +438,7 @@ public class MainFrame extends JFrame {
         }
     }
 
-	public void init() {
+	public void showHome() {
 		if (currentPanel != null) {
 			remove(currentPanel);
 		}
