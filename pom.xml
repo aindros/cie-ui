@@ -14,6 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
 		<apache.pdfbox.version>2.0.8</apache.pdfbox.version>
+		<lombok.version>1.18.22</lombok.version>
 	</properties>
 
 	<dependencyManagement>
@@ -221,6 +222,12 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 		</dependency>
 	</dependencies>
 
