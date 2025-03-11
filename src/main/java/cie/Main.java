@@ -103,9 +103,7 @@ public class Main {
 	private static void notifyPinWrong()
 	{
 		NotificationBuilder nb = Notify.builder();
-		nb.withTitle("CIE ID");
 		nb.withMessage("PIN errato");
-		//nb.withIcon(CrmIcons.CALL);
 		nb.withDisplayTime(1000 * 5);
 
 //		nb.withListener(new NotificationEventAdapter() {
@@ -124,9 +122,7 @@ public class Main {
 	private static void notifyCardNotRegistered()
 	{
 		NotificationBuilder nb = Notify.builder();
-		nb.withTitle("CIE ID");
 		nb.withMessage("Carta non abbinata, premere qui per abbinare la CIE");
-		//nb.withIcon(CrmIcons.CALL);
 		nb.withDisplayTime(1000 * 10);
 
 		nb.withListener(new NotificationEventAdapter() {
@@ -144,9 +140,7 @@ public class Main {
 	private static void notifyPinLocked()
 	{
 		NotificationBuilder nb = Notify.builder();
-		nb.withTitle("CIE ID");
 		nb.withMessage("Carta bloccata, premere qui per sbloccarla con il PUK");
-		//nb.withIcon(CrmIcons.CALL);
 		nb.withDisplayTime(1000 * 10);
 
 		nb.withListener(new NotificationEventAdapter() {

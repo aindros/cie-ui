@@ -10,11 +10,16 @@ public class Notify {
 	private static final INotificationStyle DEFAULT_STYLE =
 			new LightDefaultNotification().withCloseButton(new NullCloseButton());
 
-	public static NotificationBuilder builder() {
+	public static NotificationBuilder builder(String title) {
 		return new NotificationBuilder()
 				.withStyle(DEFAULT_STYLE)
 				.withFadeInAnimation(true)
 				.withFadeOutAnimation(true)
-				.withPosition(Positions.NORTH_EAST);
+				.withPosition(Positions.NORTH_EAST)
+				.withTitle(title);
+	}
+
+	public static NotificationBuilder builder() {
+		return builder("CIE ID");
 	}
 }
