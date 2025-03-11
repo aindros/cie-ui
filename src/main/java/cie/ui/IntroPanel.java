@@ -67,50 +67,8 @@ public class IntroPanel extends JPanel {
 	 */
 	public IntroPanel() {
 		init();
+		initWelcomePanel();
 
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, -30, 800, 630);
-		add(tabbedPane);
-		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
-		panel.setLayout(null);
-		panel.setBackground(Color.WHITE);
-		
-		JLabel label = new JLabel("Benvenuto in CIE ID");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Dialog", Font.BOLD, 30));
-		label.setBounds(229, 34, 332, 36);
-		panel.add(label);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setText("Il software che ti permette di autenticarti ai servizi online della Pubblica Amministrazione per mezzo della nuova carta d'identità elettronica");
-		textPane.setEditable(false);
-		textPane.setBounds(153, 111, 521, 53);
-		panel.add(textPane);
-		
-		JButton button = new JButton("Continua");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tabbedPane.setSelectedIndex(1);
-			}
-		});
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(30, 144, 255));
-		button.setBounds(334, 499, 114, 25);
-		panel.add(button);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		try {
-			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroPanel.class.getResource("/it/ipzs/cieid/res/flusso_intro_01.png")))));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		lblNewLabel.setBounds(111, 152, 563, 335);
-		panel.add(lblNewLabel);
-		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_1, null);
 		panel_1.setLayout(null);
@@ -164,19 +122,11 @@ public class IntroPanel extends JPanel {
 		btnInizia.setBackground(new Color(30, 144, 255));
 		btnInizia.setBounds(337, 507, 114, 25);
 		panel_1.add(btnInizia);
-		
-		
-		StyledDocument doc = textPane.getStyledDocument();
+
+		StyledDocument doc = textPane_1.getStyledDocument();
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-		
-		doc = textPane_1.getStyledDocument();
-		center = new SimpleAttributeSet();
-		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-		
-				
 	}
 
 	private void init() {
@@ -184,5 +134,56 @@ public class IntroPanel extends JPanel {
 		setBounds(100, 100, 800, 600);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
+
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, -30, 800, 630);
+		add(tabbedPane);
+	}
+
+	private void addTab(JPanel panel) {
+		tabbedPane.addTab("New tab", null, panel, null);
+	}
+
+	private void initWelcomePanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+
+		JLabel label = new JLabel("Benvenuto in CIE ID");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Dialog", Font.BOLD, 30));
+		label.setBounds(229, 34, 332, 36);
+		panel.add(label);
+
+		JTextPane textPane = new JTextPane();
+		textPane.setText("Il software che ti permette di autenticarti ai servizi online della Pubblica Amministrazione per mezzo della nuova carta d'identità elettronica");
+		textPane.setEditable(false);
+		textPane.setBounds(153, 111, 521, 53);
+		panel.add(textPane);
+
+		JButton button = new JButton("Continua");
+		button.addActionListener(e -> tabbedPane.setSelectedIndex(1));
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(30, 144, 255));
+		button.setBounds(334, 499, 114, 25);
+		panel.add(button);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(getClass().getResource("/it/ipzs/cieid/res/flusso_intro_01.png")))));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		lblNewLabel.setBounds(111, 152, 563, 335);
+		panel.add(lblNewLabel);
+
+		StyledDocument doc = textPane.getStyledDocument();
+		SimpleAttributeSet center = new SimpleAttributeSet();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+		addTab(panel);
 	}
 }
