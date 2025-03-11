@@ -69,20 +69,9 @@ public class Main {
 	 * Create the application.
 	 */
 	public Main(String[] args) {
-		initialize(args);
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize(String[] args) {
-
-		if("false".equals(Utils.getProperty("nomore", "false")))
-		{
+		if("false".equals(Utils.getProperty("nomore", "false"))) {
 			frame = new IntroFrame();
-		}
-		else
-		{
+		} else {
 			frame = new MainFrame(args);
 		}
 
