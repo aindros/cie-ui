@@ -1,4 +1,4 @@
-package it.ipzs.cieid;
+package cie;
 
 import java.awt.EventQueue;
 import java.nio.file.Files;
@@ -13,6 +13,8 @@ import ch.swingfx.twinkle.event.NotificationEventAdapter;
 import ch.swingfx.twinkle.style.closebutton.NullCloseButton;
 import ch.swingfx.twinkle.style.theme.LightDefaultNotification;
 import ch.swingfx.twinkle.window.Positions;
+import it.ipzs.cieid.IntroFrame;
+import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.Utils;
 
 
