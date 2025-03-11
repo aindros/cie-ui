@@ -38,7 +38,6 @@ import it.ipzs.cieid.IntroFrame;
 import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.Utils;
 
-
 public class Main {
 	/**
 	 * Launch the application.
@@ -48,33 +47,23 @@ public class Main {
 				.addOption(0, "pinwrong",          () -> Notify.message("PIN errato", 5))
 				.addOption(0, "cardnotregistered", () -> Notify.message("Carta non abbinata, premere qui per abbinare la CIE", 10, (e) -> Main.showUI()))
 				.addOption(0, "pinlocked",         () -> Notify.message("Carta bloccata, premere qui per sbloccarla con il PUK", 10, (e) -> Main.showUI("unlock")))
-				.addDefaultOption(() -> {
-					try {
-						showUI(args);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				})
+				.addDefaultOption(() -> showUI(args))
 				.parse(args));
 	}
 
-	private JFrame frame;
-
 	public static void showUI(String... args) {
-		Main window = new Main(args);
-		window.frame.setVisible(true);
-	}
+		try {
+			JFrame frame;
+			if ("false".equals(Utils.getProperty("nomore", "false"))) {
+				frame = new IntroFrame();
+			} else {
+				frame = new MainFrame(args);
+			}
 
-	/**
-	 * Create the application.
-	 */
-	public Main(String[] args) {
-		if("false".equals(Utils.getProperty("nomore", "false"))) {
-			frame = new IntroFrame();
-		} else {
-			frame = new MainFrame(args);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
