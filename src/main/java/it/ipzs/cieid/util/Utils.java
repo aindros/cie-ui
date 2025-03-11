@@ -1,5 +1,6 @@
 package it.ipzs.cieid.util;
 
+import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,6 +8,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.Buffer;
+import java.util.Optional;
 import java.util.Properties;
 
 public class Utils {
@@ -97,5 +101,16 @@ public class Utils {
 		}
 		
 	}
-	
+
+	public static Optional<URL> getResource(String path) {
+		return Optional.ofNullable(Utils.class.getResource(path));
+	}
+
+	public static Optional<BufferedImage> getImage(URL url) {
+		try {
+			return Optional.of(ImageIO.read(url));
+		} catch (IOException e) {
+			return Optional.empty();
+		}
+	}
 }

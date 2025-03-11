@@ -88,40 +88,11 @@ public class IntroPanel extends JPanel {
 		panel.setLayout(null);
 		panel.setBackground(Color.WHITE);
 
-		JLabel label = new JLabel("Benvenuto in CIE ID");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Dialog", Font.BOLD, 30));
-		label.setBounds(229, 34, 332, 36);
-		panel.add(label);
+		addLabel(panel, "Benvenuto in CIE ID");
+		addText(panel, "Il software che ti permette di autenticarti ai servizi online della Pubblica Amministrazione per mezzo della nuova carta d'identità elettronica");
+		addButton(panel, "Continua", null);
 
-		JTextPane textPane = new JTextPane();
-		textPane.setText("Il software che ti permette di autenticarti ai servizi online della Pubblica Amministrazione per mezzo della nuova carta d'identità elettronica");
-		textPane.setEditable(false);
-		textPane.setBounds(153, 111, 521, 53);
-		panel.add(textPane);
-
-		JButton button = new JButton("Continua");
-		button.addActionListener(e -> tabbedPane.setSelectedIndex(1));
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(30, 144, 255));
-		button.setBounds(334, 499, 114, 25);
-		panel.add(button);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		try {
-			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(getClass().getResource("/it/ipzs/cieid/res/flusso_intro_01.png")))));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		lblNewLabel.setBounds(111, 152, 563, 335);
-		panel.add(lblNewLabel);
-
-		StyledDocument doc = textPane.getStyledDocument();
-		SimpleAttributeSet center = new SimpleAttributeSet();
-		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+		addImage(panel, "/it/ipzs/cieid/res/flusso_intro_01.png");
 
 		addTab(panel);
 	}
@@ -131,58 +102,77 @@ public class IntroPanel extends JPanel {
 		panel.setLayout(null);
 		panel.setBackground(Color.WHITE);
 
-		JLabel label = new JLabel("Per iniziare");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Dialog", Font.BOLD, 30));
-		label.setBounds(264, 36, 190, 36);
-		panel.add(label);
-
-		JTextPane textPane = new JTextPane();
-		textPane.setText("Munisciti di un lettore di smart card contactless, della tua Carta di Identità Elettronica e del PIN");
-		textPane.setEditable(false);
-		textPane.setBounds(63, 84, 583, 21);
-		panel.add(textPane);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		try {
-			lblNewLabel.setIcon(new ImageIcon(Utils.scaleimage(400, 300, ImageIO.read(IntroPanel.class.getResource("/it/ipzs/cieid/res/flusso_intro_02.png")))));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		lblNewLabel.setBounds(111, 152, 563, 335);
-		panel.add(lblNewLabel);
-
 		final JCheckBox chckbxNoMore = new JCheckBox("Non mostrare più");
 		chckbxNoMore.setBackground(Color.WHITE);
 		chckbxNoMore.setBounds(591, 508, 157, 23);
 		panel.add(chckbxNoMore);
 
-		JButton btnInizia = new JButton("Inizia");
-		btnInizia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(chckbxNoMore.isSelected())
-					Utils.setProperty("nomore", "true");
-
-				// TODO open main frame
-				JFrame frame = new MainFrame(new String[] { });
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-				setVisible(false);
-				frame.setVisible(true);
+		addLabel(panel, "Per iniziare");
+		addText(panel, "Munisciti di un lettore di smart card contactless, della tua Carta di Identità Elettronica e del PIN");
+		addButton(panel, "Inizia", e -> {
+			if(chckbxNoMore.isSelected()) {
+				Utils.setProperty("nomore", "true");
 			}
+
+			JFrame frame = new MainFrame(new String[] { });
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			setVisible(false);
+			frame.setVisible(true);
 		});
-		btnInizia.setForeground(Color.WHITE);
-		btnInizia.setBackground(new Color(30, 144, 255));
-		btnInizia.setBounds(337, 507, 114, 25);
-		panel.add(btnInizia);
+
+		addImage(panel, "/it/ipzs/cieid/res/flusso_intro_02.png");
+
+		addTab(panel);
+	}
+
+	private void addLabel(JPanel panel, String text) {
+		JLabel label = new JLabel(text);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Dialog", Font.BOLD, 30));
+		label.setLocation(0, 36);
+		label.setSize(tabbedPane.getWidth(), 36);
+
+		panel.add(label);
+	}
+
+	private void addText(JPanel panel, String text) {
+		JTextPane textPane = new JTextPane();
+		textPane.setText(text);
+		textPane.setEditable(false);
+		textPane.setBounds(150, 110, tabbedPane.getWidth() - 300, 55);
+		panel.add(textPane);
 
 		StyledDocument doc = textPane.getStyledDocument();
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+	}
 
-		addTab(panel);
+	private void addButton(JPanel panel, String caption, ActionListener actionListener) {
+		JButton button = new JButton(caption);
+		button.addActionListener(e -> tabbedPane.setSelectedIndex(1));
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(30, 144, 255));
+		button.setBounds(334, 499, 114, 25);
+		panel.add(button);
+
+		if (actionListener != null) {
+			button.addActionListener(actionListener);
+		}
+
+		button.setBounds(337, 507, 114, 25);
+	}
+
+	private void addImage(JPanel panel, String name) {
+		JLabel label = new JLabel("");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+
+		Utils.getResource(name)
+				.flatMap(Utils::getImage)
+				.ifPresent(bufferedImage -> label.setIcon(new ImageIcon(Utils.scaleimage(400, 300, bufferedImage))));
+
+		label.setBounds(100, 150, tabbedPane.getWidth() - 200, 335);
+		panel.add(label);
 	}
 }
