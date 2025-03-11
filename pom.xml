@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>it.ipzs</groupId>
-	<artifactId>cieid</artifactId>
+	<artifactId>cie-ui</artifactId>
 	<version>0.0.0-alpha.0</version>
 
 	<name>cieid</name>
