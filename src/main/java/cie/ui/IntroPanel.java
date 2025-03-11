@@ -66,10 +66,7 @@ public class IntroPanel extends JPanel {
 	 * Create the frame.
 	 */
 	public IntroPanel() {
-		setBackground(Color.WHITE);
-		setBounds(100, 100, 800, 600);
-		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(null);
+		init();
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, -30, 800, 630);
@@ -180,5 +177,12 @@ public class IntroPanel extends JPanel {
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		
 				
+	}
+
+	private void init() {
+		setBackground(Color.WHITE);
+		setBounds(100, 100, 800, 600);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 	}
 }
