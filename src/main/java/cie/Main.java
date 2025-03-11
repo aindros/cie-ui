@@ -44,6 +44,7 @@ import ch.swingfx.twinkle.event.NotificationEventAdapter;
 import ch.swingfx.twinkle.style.closebutton.NullCloseButton;
 import ch.swingfx.twinkle.style.theme.LightDefaultNotification;
 import ch.swingfx.twinkle.window.Positions;
+import cie.ui.Notify;
 import it.ipzs.cieid.IntroFrame;
 import it.ipzs.cieid.MainFrame;
 import it.ipzs.cieid.util.Utils;
@@ -101,7 +102,7 @@ public class Main {
 
 	private static void notifyPinWrong()
 	{
-		NotificationBuilder nb = createNotificationBuilder();
+		NotificationBuilder nb = Notify.builder();
 		nb.withTitle("CIE ID");
 		nb.withMessage("PIN errato");
 		//nb.withIcon(CrmIcons.CALL);
@@ -122,7 +123,7 @@ public class Main {
 
 	private static void notifyCardNotRegistered()
 	{
-		NotificationBuilder nb = createNotificationBuilder();
+		NotificationBuilder nb = Notify.builder();
 		nb.withTitle("CIE ID");
 		nb.withMessage("Carta non abbinata, premere qui per abbinare la CIE");
 		//nb.withIcon(CrmIcons.CALL);
@@ -142,7 +143,7 @@ public class Main {
 
 	private static void notifyPinLocked()
 	{
-		NotificationBuilder nb = createNotificationBuilder();
+		NotificationBuilder nb = Notify.builder();
 		nb.withTitle("CIE ID");
 		nb.withMessage("Carta bloccata, premere qui per sbloccarla con il PUK");
 		//nb.withIcon(CrmIcons.CALL);
@@ -158,19 +159,4 @@ public class Main {
 
 		nb.showNotification();
 	}
-
-	public static NotificationBuilder createNotificationBuilder()
-	{
-		NotificationBuilder nb = new NotificationBuilder();
-		LightDefaultNotification style = new LightDefaultNotification();
-		style.withCloseButton(new NullCloseButton());
-		nb.withStyle(style);
-		nb.withFadeInAnimation(true);
-		nb.withFadeOutAnimation(true);
-		nb.withPosition(Positions.NORTH_EAST);
-		//nb.withDisplayTime(10000);
-
-		return nb;
-	}
-
 }
