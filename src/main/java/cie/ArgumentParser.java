@@ -38,6 +38,7 @@ import java.util.Map;
 
 public class ArgumentParser {
 	private final Map<String, Option> options = new HashMap<>();
+	private Option defaultOption = null;
 
 	public ArgumentParser addOption(String option, Runnable action) {
 		return addOption(null, option, action);
@@ -50,8 +51,22 @@ public class ArgumentParser {
 
 	private void showHelp() {}
 
+	public ArgumentParser addDefaultOption(Runnable action) {
+		defaultOption = new Option(null, null, action);
+		return this;
+	}
+
+	private void runDefaultOption() {
+		if (defaultOption == null) return;
+
+		defaultOption.action.run();
+	}
+
 	public void parse(String... args) {
-		if (args == null) return;
+		if (args == null || args.length == 0) {
+			runDefaultOption();
+			return;
+		}
 
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i];
