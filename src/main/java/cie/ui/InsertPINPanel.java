@@ -34,9 +34,11 @@ package cie.ui;
 import it.ipzs.cieid.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class InsertPINPanel extends CIEPanel {
 	private JButton buttonPair = new JButton("Abbina");
+	private final JLabel labelInsertPIN = new JLabel("Inserisci il PIN");
 	private PasswordField passwordField;
 
 	public InsertPINPanel() {
@@ -50,6 +52,11 @@ public class InsertPINPanel extends CIEPanel {
 		labelImage.setIcon(new ImageIcon(MainFrame.class.getResource("/it/ipzs/cieid/res/icona_lettore_card_white.png")));
 		labelImage.setBounds(29, 194, 211, 205);
 		add(labelImage);
+
+		labelInsertPIN.setHorizontalAlignment(SwingConstants.CENTER);
+		labelInsertPIN.setFont(new Font("Dialog", Font.BOLD, 22));
+		labelInsertPIN.setBounds(252, 259, 299, 36);
+		add(labelInsertPIN);
 
 		passwordField = new PasswordField(8);
 		passwordField.setBounds(250, 300, 300, 30);

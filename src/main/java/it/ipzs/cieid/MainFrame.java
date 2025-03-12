@@ -713,11 +713,6 @@ public class MainFrame extends JFrame {
         btnPair.setBounds(258, 524, 114, 25);
         //pnPairCIE_Index_1.add(btnPair);
 
-        JLabel lblTypeYourCIEPIN = new JLabel("Inserisci il PIN");
-        lblTypeYourCIEPIN.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTypeYourCIEPIN.setFont(new Font("Dialog", Font.BOLD, 22));
-        lblTypeYourCIEPIN.setBounds(252, 259, 299, 36);
-		insertPINPanel.add(lblTypeYourCIEPIN);
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setBackground(new Color(255, 255, 255));
         FlowLayout flowLayout = (FlowLayout) buttonsPanel.getLayout();
