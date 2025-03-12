@@ -179,7 +179,6 @@ public class MainFrame extends JFrame {
     public static final int CKR_PIN_LOCKED = 0x000000A4;
 
     private JPanel contentPane;
-    private CardLayout cardLayout;
     private JTabbedPane tabbedPane;
     private JButton btnHome;
     private JButton btnChangePIN;
@@ -187,14 +186,6 @@ public class MainFrame extends JFrame {
     private JButton btnTutorial;
     private JButton btnHelp;
     private JButton btnInformation;
-    private JPasswordField passwordField;
-    private JPasswordField passwordField_1;
-    private JPasswordField passwordField_2;
-    private JPasswordField passwordField_3;
-    private JPasswordField passwordField_4;
-    private JPasswordField passwordField_5;
-    private JPasswordField passwordField_6;
-    private JPasswordField passwordField_7;
 
     private JPasswordField passwordSignFields[] = new JPasswordField[8];
     private JPanel panel_PairCIE;
@@ -205,17 +196,8 @@ public class MainFrame extends JFrame {
     private JPanel pnCIEHomeSelector_Index_3;
     private JLabel lblCieId;
     private JTextPane txtpnCIEPanelsSubtitle;
-    private JLabel label_4;
-    private JCheckBox checkBox_1;
-    private JButton buttonRemove;
-    private JLabel lblCardNumber;
-    private JLabel labelSerial;
-    private JLabel labelCardholder;
     private JButton btnPair;
 
-    private String serialNumber;
-    private String cardHolder;
-    private String ef_seriale;
     private JProgressBar progressBar;
     private JLabel lblProgress;
     private JPanel pnChangePINTypingScreen_Index_4;
