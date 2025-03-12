@@ -27,9 +27,17 @@ public class PINValidator implements Validator {
 		                              JOptionPane.ERROR_MESSAGE);
 	}
 
+	private boolean pinIsNotNumeric() {
+		for (int i = 0; i < pin.length(); i++) {
+			if (!Character.isDigit(pin.charAt(i))) return true;
+		}
+
+		return false;
+	}
+
 	@Override
 	public void validate() {
-		if (pin.length() != pinSize) {
+		if (pin.length() != pinSize || pinIsNotNumeric()) {
 			showErrorDialog("PIN non corretto", "Il PIN deve essere composto da " + pinSize + " numeri");
 			return;
 		}
