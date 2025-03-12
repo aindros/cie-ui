@@ -32,14 +32,20 @@
 package cie.ui;
 
 import it.ipzs.cieid.MainFrame;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+@Slf4j
 public class InsertPINPanel extends CIEPanel {
-	private JButton buttonPair = new JButton("Abbina");
+	private final JButton buttonPair = new JButton("Abbina");
+	private JButton buttonCancel = new JButton("Annulla");
 	private final JLabel labelInsertPIN = new JLabel("Inserisci il PIN");
 	private PasswordField passwordField;
+	private Runnable onCancelAction = null;
 
 	public InsertPINPanel() {
 		super("Abbina la tua CIE", "Dopo aver collegato e installato il lettore di smart card, posiziona la CIE sul lettore ed inserisci il PIN");
@@ -61,6 +67,39 @@ public class InsertPINPanel extends CIEPanel {
 		passwordField = new PasswordField(8);
 		passwordField.setBounds(250, 300, 300, 30);
 		add(passwordField);
+
+		buttonPair.addActionListener(e -> {
+			log.info("Inizia 'Abbina'");
+			passwordField.submit();
+		});
+		buttonPair.setForeground(Color.WHITE);
+		buttonPair.setBackground(new Color(30, 144, 255));
+		buttonPair.setBounds(258, 524, 114, 25);
+
+		initButtonsPanel();
+	}
+
+	private void initButtonsPanel() {
+		buttonCancel = new JButton("Annulla");
+		buttonCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (onCancelAction != null) {
+					log.info("Annulla abbinamento carta");
+					onCancelAction.run();
+				}
+			}
+		});
+		buttonCancel.setForeground(Color.WHITE);
+		buttonCancel.setBackground(new Color(30, 144, 255));
+
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBackground(new Color(255, 255, 255));
+		FlowLayout flowLayout = (FlowLayout) buttonsPanel.getLayout();
+		flowLayout.setHgap(100);
+		buttonsPanel.setBounds(133, 500, 384, 36);
+		buttonsPanel.add(buttonCancel);
+		buttonsPanel.add(buttonPair);
+		add(buttonsPanel);
 	}
 
 	public String getPassword() {
@@ -75,13 +114,29 @@ public class InsertPINPanel extends CIEPanel {
 		passwordField.onSubmit(action);
 	}
 
-	public void submit() {
-		passwordField.submit();
+	public void onCancel(Runnable action) {
+		onCancelAction = action;
 	}
 
 	@Override
 	public void requestFocus() {
 		super.requestFocus();
 		passwordField.requestFocus();
+	}
+
+	/**
+	 * @deprecated Must be found something to incapsulate this button.
+	 */
+	@Deprecated
+	public JButton getButtonPair() {
+		return buttonPair;
+	}
+
+	/**
+	 * @deprecated Must be found something to incapsulate this button.
+	 */
+	@Deprecated
+	public JButton getButtonCancel() {
+		return buttonCancel;
 	}
 }

@@ -681,37 +681,12 @@ public class MainFrame extends JFrame {
 
 		insertPINPanel = new InsertPINPanel();
 		insertPINPanel.onSubmit(this::pairCIE);
+		insertPINPanel.onCancel(this::selectHome);
 		tabbedPane.addTab("New tab", null, insertPINPanel, null);
 
-        btnPair = new JButton("Abbina");
-        btnPair.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                logger.Info("Inizia  'Abbina'");
-                pairCIE();
-            }
-        });
-        btnPair.setForeground(Color.WHITE);
-        btnPair.setBackground(new Color(30, 144, 255));
-        btnPair.setBounds(258, 524, 114, 25);
-        //pnPairCIE_Index_1.add(btnPair);
+		btnPair = insertPINPanel.getButtonPair();
+		btnCancel = insertPINPanel.getButtonCancel();
 
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBackground(new Color(255, 255, 255));
-        FlowLayout flowLayout = (FlowLayout) buttonsPanel.getLayout();
-        flowLayout.setHgap(100);
-        buttonsPanel.setBounds(133, 500, 384, 36);
-        btnCancel = new JButton("Annulla");
-        btnCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                logger.Info("Annulla abbinamento carta");
-                selectHome();
-            }
-        });
-        btnCancel.setForeground(Color.WHITE);
-        btnCancel.setBackground(new Color(30, 144, 255));
-        buttonsPanel.add(btnCancel);
-        buttonsPanel.add(btnPair);
-		insertPINPanel.add(buttonsPanel);
         panel_PairCIE = new JPanel();
         panel_PairCIE.setLayout(null);
         panel_PairCIE.setBackground(Color.WHITE);
