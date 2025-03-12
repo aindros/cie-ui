@@ -37,7 +37,6 @@ import javax.swing.*;
 
 public class InsertPINPanel extends CIEPanel {
 	private JButton buttonPair = new JButton("Abbina");
-	private Runnable onSubmit;
 	private PasswordField passwordField;
 
 	public InsertPINPanel() {
