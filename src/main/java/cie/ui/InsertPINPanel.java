@@ -129,6 +129,10 @@ public class InsertPINPanel extends CIEPanel {
 		passwordField.requestFocus();
 	}
 
+	public void disableButtonPair() {
+		buttonPair.setEnabled(false);
+	}
+
 	/**
 	 * @deprecated Must be found something to incapsulate this button.
 	 */
