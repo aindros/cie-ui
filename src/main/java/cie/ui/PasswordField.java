@@ -30,49 +30,62 @@ public class PasswordField extends JPanel {
 
 		passwordFields[0].addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyReleased(KeyEvent e) {
+				actionOnArrowKeys(0, e);
+			}
+
+			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
 					e.consume();
 				} else {
-					if (digits > 1) {
-						passwordFields[1].requestFocus();
-					}
+					requestFocus(1);
 				}
 			}
 		});
 
 		for (int i = 1; i < passwordFields.length - 1; i++) {
 			JPasswordField passwordFieldBefore = passwordFields[i - 1];
-			JPasswordField passwordFieldNext = passwordFields[i + 1];
 
+			final int index = i;
 			passwordFields[i].addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					actionOnArrowKeys(index, e);
+				}
+
 				@Override
 				public void keyTyped(KeyEvent e) {
 					if (e.getKeyChar() == '\b') {
 						passwordFieldBefore.setText("");
-						passwordFieldBefore.requestFocus();
+						requestFocus(index - 1);
 					} else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
 						e.consume();
 					} else {
-						passwordFieldNext.requestFocus();
+						requestFocus(index + 1);
 					}
 				}
 			});
 		}
 
-		JPasswordField passwordFieldBefore = passwordFields[passwordFields.length - 2];
-		JPasswordField passwordField = passwordFields[passwordFields.length - 1];
-		passwordField.addKeyListener(new KeyAdapter() {
+		final int index = passwordFields.length - 1;
+		JPasswordField passwordFieldBefore = passwordFields[index - 1];
+		passwordFields[index].addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				actionOnArrowKeys(index, e);
+			}
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() == '\n' || e.getKeyChar() == '\r') {
 					submit();
 				} else if (e.getKeyChar() == '\b') {
 					passwordFieldBefore.setText("");
-					passwordFieldBefore.requestFocus();
+					requestFocus(index - 1);
 				} else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
 					e.consume();
-				} else if (passwordField.getPassword().length > 0) {
+				} else if (passwordFields[index].getPassword().length > 0) {
 					e.consume();
 				}
 			}
@@ -107,5 +120,20 @@ public class PasswordField extends JPanel {
 	public void requestFocus() {
 		super.requestFocus();
 		passwordFields[0].requestFocus();
+	}
+
+	private void requestFocus(int index) {
+		if (index < 0 || passwordFields.length <= index) return;
+		passwordFields[index].requestFocus();
+	}
+
+	private void actionOnArrowKeys(int index, KeyEvent e) {
+		int keyCode = e.getKeyCode();
+		if (keyCode != KeyEvent.VK_RIGHT && keyCode != KeyEvent.VK_LEFT) {
+			e.consume();
+			return;
+		}
+
+		requestFocus(keyCode == KeyEvent.VK_RIGHT? index + 1 : index - 1);
 	}
 }
