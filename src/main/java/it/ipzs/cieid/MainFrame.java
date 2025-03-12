@@ -3169,12 +3169,6 @@ public class MainFrame extends JFrame {
         logger.Info("Inizia - pairCIE()");
         int i;
 
-        if (pin.length() != 8) {
-            logger.Error("PIN non corretto");
-            JOptionPane.showMessageDialog(this.getContentPane(), "Il PIN deve essere composto da 8 numeri", "PIN non corretto", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         char c = pin.charAt(0);
         i = 1;
 

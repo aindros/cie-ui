@@ -31,6 +31,7 @@
 
 package cie.ui;
 
+import cie.validator.PINValidator;
 import it.ipzs.cieid.MainFrame;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +42,7 @@ import java.awt.event.ActionListener;
 
 @Slf4j
 public class InsertPINPanel extends CIEPanel {
+	private static final int PIN_SIZE = 8;
 	private final JButton buttonPair = new JButton("Abbina");
 	private JButton buttonCancel = new JButton("Annulla");
 	private final JLabel labelInsertPIN = new JLabel("Inserisci il PIN");
@@ -64,7 +66,8 @@ public class InsertPINPanel extends CIEPanel {
 		labelInsertPIN.setBounds(252, 259, 299, 36);
 		add(labelInsertPIN);
 
-		passwordField = new PasswordField(8);
+		passwordField = new PasswordField(PIN_SIZE)
+				.addOnSubmitValidator((pin, size) -> new PINValidator(pin, size, this));
 		passwordField.setBounds(250, 300, 300, 30);
 		add(passwordField);
 
