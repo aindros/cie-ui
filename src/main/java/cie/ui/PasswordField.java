@@ -1,8 +1,9 @@
 package cie.ui;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class PasswordField extends JPanel {
@@ -28,12 +29,7 @@ public class PasswordField extends JPanel {
 			passwordFields[i] = passwordField;
 		}
 
-		passwordFields[0].addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				actionOnArrowKeys(0, e);
-			}
-
+		passwordFields[0].addKeyListener(new KeyAdapter(0, passwordFields) {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
@@ -48,12 +44,7 @@ public class PasswordField extends JPanel {
 			JPasswordField passwordFieldBefore = passwordFields[i - 1];
 
 			final int index = i;
-			passwordFields[i].addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyReleased(KeyEvent e) {
-					actionOnArrowKeys(index, e);
-				}
-
+			passwordFields[i].addKeyListener(new KeyAdapter(index, passwordFields) {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					if (e.getKeyChar() == '\b') {
@@ -70,12 +61,7 @@ public class PasswordField extends JPanel {
 
 		final int index = passwordFields.length - 1;
 		JPasswordField passwordFieldBefore = passwordFields[index - 1];
-		passwordFields[index].addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				actionOnArrowKeys(index, e);
-			}
-
+		passwordFields[index].addKeyListener(new KeyAdapter(index, passwordFields) {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() == '\n' || e.getKeyChar() == '\r') {
@@ -122,18 +108,29 @@ public class PasswordField extends JPanel {
 		passwordFields[0].requestFocus();
 	}
 
-	private void requestFocus(int index) {
-		if (index < 0 || passwordFields.length <= index) return;
-		passwordFields[index].requestFocus();
-	}
+	@RequiredArgsConstructor
+	private static class KeyAdapter extends java.awt.event.KeyAdapter {
+		private final int index;
+		private final JPasswordField[] passwordFields;
 
-	private void actionOnArrowKeys(int index, KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if (keyCode != KeyEvent.VK_RIGHT && keyCode != KeyEvent.VK_LEFT) {
-			e.consume();
-			return;
+		@Override
+		public void keyReleased(KeyEvent e) {
+			actionOnArrowKeys(index, e);
 		}
 
-		requestFocus(keyCode == KeyEvent.VK_RIGHT? index + 1 : index - 1);
+		private void actionOnArrowKeys(int index, KeyEvent e) {
+			int keyCode = e.getKeyCode();
+			if (keyCode != KeyEvent.VK_RIGHT && keyCode != KeyEvent.VK_LEFT) {
+				e.consume();
+				return;
+			}
+
+			requestFocus(keyCode == KeyEvent.VK_RIGHT? index + 1 : index - 1);
+		}
+
+		protected void requestFocus(int index) {
+			if (index < 0 || passwordFields.length <= index) return;
+			passwordFields[index].requestFocus();
+		}
 	}
 }
