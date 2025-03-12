@@ -679,9 +679,9 @@ public class MainFrame extends JFrame {
         });
         contentPane.add(tabbedPane);
 
-		insertPINPanel = new InsertPINPanel();
-		insertPINPanel.onSubmit(this::pairCIE);
-		insertPINPanel.onCancel(this::selectHome);
+		insertPINPanel = new InsertPINPanel()
+				.onSubmit(() -> pairCIE(insertPINPanel.getPassword()))
+				.onCancel(this::selectHome);
 		tabbedPane.addTab("New tab", null, insertPINPanel, null);
 
 		btnPair = insertPINPanel.getButtonPair();
@@ -3165,9 +3165,8 @@ public class MainFrame extends JFrame {
         }
     }
 
-    private void pairCIE() {
+    private void pairCIE(String pin) {
         logger.Info("Inizia - pairCIE()");
-        String pin = insertPINPanel.getPassword();
         int i;
 
         if (pin.length() != 8) {

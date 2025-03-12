@@ -110,12 +110,14 @@ public class InsertPINPanel extends CIEPanel {
 		passwordField.clear();
 	}
 
-	public void onSubmit(Runnable action) {
+	public InsertPINPanel onSubmit(Runnable action) {
 		passwordField.onSubmit(action);
+		return this;
 	}
 
-	public void onCancel(Runnable action) {
+	public InsertPINPanel onCancel(Runnable action) {
 		onCancelAction = action;
+		return this;
 	}
 
 	@Override
