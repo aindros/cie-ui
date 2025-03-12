@@ -196,7 +196,6 @@ public class MainFrame extends JFrame {
     private JPanel pnCIEHomeSelector_Index_3;
     private JLabel lblCieId;
     private JTextPane txtpnCIEPanelsSubtitle;
-    private JButton btnPair;
 
     private JProgressBar progressBar;
     private JLabel lblProgress;
@@ -250,7 +249,6 @@ public class MainFrame extends JFrame {
     private JButton btnRemoveAll;
     private JButton btnRemoveSelected;
     private JButton btnNewButton;
-    private JButton btnCancel;
     private carousel cieCarousel;
     private Map<String, Cie> cieDictionary;
     private JButton btnDigitalSignature;
@@ -697,9 +695,6 @@ public class MainFrame extends JFrame {
         contentPane.add(tabbedPane);
 
 		initComponents();
-
-		btnPair = insertPINPanel.getButtonPair();
-		btnCancel = insertPINPanel.getButtonCancel();
 
         panel_PairCIE = new JPanel();
         panel_PairCIE.setLayout(null);
@@ -3214,8 +3209,9 @@ public class MainFrame extends JFrame {
                     EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             try {
-                                if(!shouldSignWithoutPairing)
-                                    btnPair.setEnabled(true);
+								if(!shouldSignWithoutPairing) {
+									insertPINPanel.enableButtonPair();
+								}
 
                                 switch (ret) {
                                     case CKR_TOKEN_NOT_RECOGNIZED:
@@ -3747,11 +3743,7 @@ public class MainFrame extends JFrame {
             btnRemoveAll.setVisible(false);
         }
 
-        if (cieDictionary.size() == 0) {
-            btnCancel.setVisible(false);
-        } else {
-            btnCancel.setVisible(true);
-        }
+		insertPINPanel.setButtonCancelVisible(!cieDictionary.isEmpty());
     }
 
     private void selectHome() {

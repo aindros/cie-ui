@@ -133,6 +133,14 @@ public class InsertPINPanel extends CIEPanel {
 		buttonPair.setEnabled(false);
 	}
 
+	public void enableButtonPair() {
+		buttonPair.setEnabled(true);
+	}
+
+	public void setButtonCancelVisible(boolean visible) {
+		buttonCancel.setVisible(visible);
+	}
+
 	/**
 	 * @deprecated Must be found something to incapsulate this button.
 	 */
