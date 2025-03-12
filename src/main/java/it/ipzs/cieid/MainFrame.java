@@ -422,6 +422,23 @@ public class MainFrame extends JFrame {
         }
     }
 
+	private void initComponents() {
+		initInsertPINPanel();
+	}
+
+	private void initInsertPINPanel() {
+		insertPINPanel = new InsertPINPanel()
+				.onSubmit(() -> {
+					log.info("Inizia - pairCIE()");
+					insertPINPanel.clear();
+					insertPINPanel.disableButtonPair();
+					tabbedPane.setSelectedIndex(1);
+					Runner.run(() -> pairCIEMWCall(insertPINPanel.getPassword()));
+				})
+				.onCancel(this::selectHome);
+		tabbedPane.addTab("New tab", null, insertPINPanel, null);
+	}
+
 	public void showHome() {
 		if (currentPanel != null) {
 			remove(currentPanel);
@@ -679,16 +696,7 @@ public class MainFrame extends JFrame {
         });
         contentPane.add(tabbedPane);
 
-		insertPINPanel = new InsertPINPanel()
-				.onSubmit(() -> {
-					log.info("Inizia - pairCIE()");
-					insertPINPanel.clear();
-					insertPINPanel.disableButtonPair();
-					tabbedPane.setSelectedIndex(1);
-					pairCIE(insertPINPanel.getPassword());
-				})
-				.onCancel(this::selectHome);
-		tabbedPane.addTab("New tab", null, insertPINPanel, null);
+		initComponents();
 
 		btnPair = insertPINPanel.getButtonPair();
 		btnCancel = insertPINPanel.getButtonCancel();
@@ -3169,17 +3177,6 @@ public class MainFrame extends JFrame {
                     field.setVisible(true);
             }
         }
-    }
-
-    private void pairCIE(String pin) {
-        final String pinfin = pin;
-        
-        Runner.run(new Runnable() {
-            @Override
-            public void run() {
-                pairCIEMWCall(pinfin);
-            }
-        });
     }
 
     private void pairCIEMWCall(String PIN) {
