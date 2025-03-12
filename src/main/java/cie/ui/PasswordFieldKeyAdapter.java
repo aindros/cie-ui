@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 class PasswordFieldKeyAdapter extends KeyAdapter {
 	private final int index;
 	private final JPasswordField[] passwordFields;
+	private final Runnable onSubmitAction;
 	private boolean filledLastField = false;
 
 	@Override
@@ -45,7 +46,7 @@ class PasswordFieldKeyAdapter extends KeyAdapter {
 		if (!isLastField()) return false;
 
 		if (isNewLine(e.getKeyChar())) {
-			System.out.println("Invocare il submit");
+			onSubmitAction.run();
 			return true;
 		}
 

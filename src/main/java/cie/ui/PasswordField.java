@@ -26,11 +26,8 @@ public class PasswordField extends JPanel {
 				add(Box.createHorizontalStrut(2));
 			}
 
+			passwordField.addKeyListener(new PasswordFieldKeyAdapter(i, passwordFields, this::submit));
 			passwordFields[i] = passwordField;
-		}
-
-		for (int i = 0; i < passwordFields.length; i++) {
-			passwordFields[i].addKeyListener(new PasswordFieldKeyAdapter(i, passwordFields));
 		}
 	}
 
