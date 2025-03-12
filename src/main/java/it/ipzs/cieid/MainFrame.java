@@ -80,7 +80,9 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import cie.ui.InsertPINPanel;
 import cie.ui.IntroPanel;
+import cie.ui.PasswordField;
 import it.ipzs.cieid.util.OSUtils;
 import it.ipzs.cieid.util.ProcessUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -124,6 +126,7 @@ public class MainFrame extends JFrame {
 	private final IntroPanel introPanel = new IntroPanel(this);
 	private JPanel currentPanel = null;
 	private final String[] args;
+	private InsertPINPanel insertPINPanel;
 
 	public MainFrame(String[] args) {
 		this.args = args;
@@ -193,7 +196,6 @@ public class MainFrame extends JFrame {
     private JPasswordField passwordField_6;
     private JPasswordField passwordField_7;
 
-    private JPasswordField passwordFields[] = new JPasswordField[8];
     private JPasswordField passwordSignFields[] = new JPasswordField[8];
     private JPanel panel_PairCIE;
     private JLabel label;
@@ -694,26 +696,10 @@ public class MainFrame extends JFrame {
             }
         });
         contentPane.add(tabbedPane);
-        JPanel pnPairCIE_Index_1 = new JPanel();
-        tabbedPane.addTab("New tab", null, pnPairCIE_Index_1, null);
-        pnPairCIE_Index_1.setLayout(null);
-        pnPairCIE_Index_1.setBackground(Color.WHITE);
-        JLabel lblPairYourCIE = new JLabel("Abbina la tua CIE");
-        lblPairYourCIE.setHorizontalAlignment(SwingConstants.CENTER);
-        lblPairYourCIE.setFont(new Font("Dialog", Font.BOLD, 30));
-        lblPairYourCIE.setBounds(147, 36, 299, 36);
-        pnPairCIE_Index_1.add(lblPairYourCIE);
-        JTextPane txtpnConnectAndPlaceYourCIEOnTheReader = new JTextPane();
-        txtpnConnectAndPlaceYourCIEOnTheReader.setFont(new Font("Dialog", Font.PLAIN, 16));
-        txtpnConnectAndPlaceYourCIEOnTheReader.setText("Dopo aver collegato e installato il lettore di smart card, posiziona la CIE sul lettore ed inserisci il PIN");
-        txtpnConnectAndPlaceYourCIEOnTheReader.setEditable(false);
-        txtpnConnectAndPlaceYourCIEOnTheReader.setBounds(63, 84, 492, 46);
-        pnPairCIE_Index_1.add(txtpnConnectAndPlaceYourCIEOnTheReader);
-        JLabel lblNewLabel1 = new JLabel("");
-        lblNewLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel1.setIcon(new ImageIcon(MainFrame.class.getResource("/it/ipzs/cieid/res/icona_lettore_card_white.png")));
-        lblNewLabel1.setBounds(29, 194, 211, 205);
-        pnPairCIE_Index_1.add(lblNewLabel1);
+
+		insertPINPanel = new InsertPINPanel(this::pairCIE);
+        tabbedPane.addTab("New tab", null, insertPINPanel, null);
+
         btnPair = new JButton("Abbina");
         btnPair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -725,154 +711,12 @@ public class MainFrame extends JFrame {
         btnPair.setBackground(new Color(30, 144, 255));
         btnPair.setBounds(258, 524, 114, 25);
         //pnPairCIE_Index_1.add(btnPair);
-        passwordFields[0] = passwordField = new JPasswordField();
-        passwordField.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField.setFont(new Font("Dialog", Font.BOLD, 25));
-        passwordField.setBounds(250, 321, 25, 25);
-        pnPairCIE_Index_1.add(passwordField);
-        passwordField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_1.requestFocus();
-                }
-            }
-        });
-        passwordFields[1] = passwordField_1 = new JPasswordField();
-        passwordField_1.setBounds(287, 321, 25, 25);
-        passwordField_1.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_1.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_1);
-        passwordField_1.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\b') {
-                    passwordField.setText("");
-                    passwordField.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_2.requestFocus();
-                }
-            }
-        });
-        passwordFields[2] = passwordField_2 = new JPasswordField();
-        passwordField_2.setBounds(324, 321, 25, 25);
-        passwordField_2.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_2.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_2);
-        passwordField_2.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\b') {
-                    passwordField_1.setText("");
-                    passwordField_1.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_3.requestFocus();
-                }
-            }
-        });
-        passwordFields[3] = passwordField_3 = new JPasswordField();
-        passwordField_3.setBounds(362, 321, 25, 25);
-        passwordField_3.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_3.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_3);
-        passwordField_3.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\b') {
-                    passwordField_2.setText("");
-                    passwordField_2.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_4.requestFocus();
-                }
-            }
-        });
-        passwordFields[4] = passwordField_4 = new JPasswordField();
-        passwordField_4.setBounds(399, 321, 25, 25);
-        passwordField_4.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_4.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_4);
-        passwordField_4.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\b') {
-                    passwordField_3.setText("");
-                    passwordField_3.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_5.requestFocus();
-                }
-            }
-        });
-        passwordFields[5] = passwordField_5 = new JPasswordField();
-        passwordField_5.setBounds(436, 321, 25, 25);
-        passwordField_5.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_5.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_5);
-        passwordField_5.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\b') {
-                    passwordField_4.setText("");
-                    passwordField_4.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_6.requestFocus();
-                }
-            }
-        });
-        passwordFields[6] = passwordField_6 = new JPasswordField();
-        passwordField_6.setBounds(473, 321, 25, 25);
-        passwordField_6.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_6.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_6);
-        passwordField_6.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\b') {
-                    passwordField_5.setText("");
-                    passwordField_5.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else {
-                    passwordField_7.requestFocus();
-                }
-            }
-        });
-        passwordFields[7] = passwordField_7 = new JPasswordField();
-        passwordField_7.setBounds(510, 321, 25, 25);
-        passwordField_7.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordField_7.setFont(new Font("Dialog", Font.BOLD, 25));
-        pnPairCIE_Index_1.add(passwordField_7);
-        passwordField_7.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n' || e.getKeyChar() == '\r') {
-                    pairCIE();
-                } else if (e.getKeyChar() == '\b') {
-                    passwordField_6.setText("");
-                    passwordField_6.requestFocus();
-                } else if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-                    e.consume();
-                } else if (passwordField_7.getText().length() > 0) {
-                    e.consume();
-                }
-            }
-        });
+
         JLabel lblTypeYourCIEPIN = new JLabel("Inserisci il PIN");
         lblTypeYourCIEPIN.setHorizontalAlignment(SwingConstants.CENTER);
         lblTypeYourCIEPIN.setFont(new Font("Dialog", Font.BOLD, 22));
         lblTypeYourCIEPIN.setBounds(252, 259, 299, 36);
-        pnPairCIE_Index_1.add(lblTypeYourCIEPIN);
+		insertPINPanel.add(lblTypeYourCIEPIN);
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setBackground(new Color(255, 255, 255));
         FlowLayout flowLayout = (FlowLayout) buttonsPanel.getLayout();
@@ -889,7 +733,7 @@ public class MainFrame extends JFrame {
         btnCancel.setBackground(new Color(30, 144, 255));
         buttonsPanel.add(btnCancel);
         buttonsPanel.add(btnPair);
-        pnPairCIE_Index_1.add(buttonsPanel);
+		insertPINPanel.add(buttonsPanel);
         panel_PairCIE = new JPanel();
         panel_PairCIE.setLayout(null);
         panel_PairCIE.setBackground(Color.WHITE);
@@ -1331,10 +1175,7 @@ public class MainFrame extends JFrame {
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
-        doc = txtpnConnectAndPlaceYourCIEOnTheReader.getStyledDocument();
-        center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
         doc = txtpnCIEPanelsSubtitle.getStyledDocument();
         center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
@@ -3373,13 +3214,8 @@ public class MainFrame extends JFrame {
 
     private void pairCIE() {
         logger.Info("Inizia - pairCIE()");
-        String pin = "";
+        String pin = insertPINPanel.getPassword();
         int i;
-
-        for (i = 0; i < passwordFields.length; i++) {
-            JPasswordField field = passwordFields[i];
-            pin += field.getText();
-        }
 
         if (pin.length() != 8) {
             logger.Error("PIN non corretto");
@@ -3400,10 +3236,7 @@ public class MainFrame extends JFrame {
             return;
         }
 
-        for (i = 0; i < passwordFields.length; i++) {
-            JPasswordField field = passwordFields[i];
-            field.setText("");
-        }
+		insertPINPanel.clear();
 
         btnPair.setEnabled(false);
         tabbedPane.setSelectedIndex(1);
