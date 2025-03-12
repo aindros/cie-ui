@@ -3869,7 +3869,7 @@ public class MainFrame extends JFrame {
                 tabbedPane.setSelectedIndex(0);
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        passwordField.requestFocus();
+						insertPINPanel.requestFocus();
                     }
                 });
             }

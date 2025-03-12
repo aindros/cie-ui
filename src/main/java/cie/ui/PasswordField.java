@@ -102,4 +102,10 @@ public class PasswordField extends JPanel {
 			passwordField.setText("");
 		}
 	}
+
+	@Override
+	public void requestFocus() {
+		super.requestFocus();
+		passwordFields[0].requestFocus();
+	}
 }

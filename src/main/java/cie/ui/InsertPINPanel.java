@@ -78,4 +78,10 @@ public class InsertPINPanel extends CIEPanel {
 	public void submit() {
 		passwordField.submit();
 	}
+
+	@Override
+	public void requestFocus() {
+		super.requestFocus();
+		passwordField.requestFocus();
+	}
 }
