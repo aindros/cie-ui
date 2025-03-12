@@ -66,7 +66,7 @@ public class PasswordField extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() == '\n' || e.getKeyChar() == '\r') {
-					onSubmit.run();
+					submit();
 				} else if (e.getKeyChar() == '\b') {
 					passwordFieldBefore.setText("");
 					passwordFieldBefore.requestFocus();
@@ -81,6 +81,10 @@ public class PasswordField extends JPanel {
 
 	public void onSubmit(Runnable action) {
 		onSubmit = action;
+	}
+
+	public void submit() {
+		onSubmit.run();
 	}
 
 	public String getPassword() {

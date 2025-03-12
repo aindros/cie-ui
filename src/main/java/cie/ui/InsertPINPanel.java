@@ -40,12 +40,12 @@ public class InsertPINPanel extends CIEPanel {
 	private Runnable onSubmit;
 	private PasswordField passwordField;
 
-	public InsertPINPanel(Runnable onSubmit) {
+	public InsertPINPanel() {
 		super("Abbina la tua CIE", "Dopo aver collegato e installato il lettore di smart card, posiziona la CIE sul lettore ed inserisci il PIN");
-		initComponents(onSubmit);
+		initComponents();
 	}
 
-	private void initComponents(Runnable onSubmit) {
+	private void initComponents() {
 		JLabel labelImage = new JLabel("");
 		labelImage.setHorizontalAlignment(SwingConstants.CENTER);
 		labelImage.setIcon(new ImageIcon(MainFrame.class.getResource("/it/ipzs/cieid/res/icona_lettore_card_white.png")));
@@ -53,7 +53,6 @@ public class InsertPINPanel extends CIEPanel {
 		add(labelImage);
 
 		passwordField = new PasswordField(8);
-		passwordField.onSubmit(onSubmit);
 		passwordField.setBounds(250, 300, 300, 30);
 		add(passwordField);
 	}
@@ -64,5 +63,13 @@ public class InsertPINPanel extends CIEPanel {
 
 	public void clear() {
 		passwordField.clear();
+	}
+
+	public void onSubmit(Runnable action) {
+		passwordField.onSubmit(action);
+	}
+
+	public void submit() {
+		passwordField.submit();
 	}
 }

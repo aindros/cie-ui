@@ -697,8 +697,9 @@ public class MainFrame extends JFrame {
         });
         contentPane.add(tabbedPane);
 
-		insertPINPanel = new InsertPINPanel(this::pairCIE);
-        tabbedPane.addTab("New tab", null, insertPINPanel, null);
+		insertPINPanel = new InsertPINPanel();
+		insertPINPanel.onSubmit(this::pairCIE);
+		tabbedPane.addTab("New tab", null, insertPINPanel, null);
 
         btnPair = new JButton("Abbina");
         btnPair.addActionListener(new ActionListener() {
